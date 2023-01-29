@@ -273,7 +273,10 @@ AddEventHandler('SEM_InteractionMenu:JailPlayer', function(JailTime)
             CurrentlyJailed = true
 
             while JailTime >= 0 and not EarlyRelease do
+                Ped = PlayerPedId()
+
                 SetEntityInvincible(Ped, true)
+
                 if IsPedInAnyVehicle(Ped, false) then
 					ClearPedTasksImmediately(Ped)
                 end
@@ -416,11 +419,15 @@ AddEventHandler('SEM_InteractionMenu:HospitalizePlayer', function(HospitalTime, 
     local Ped = PlayerPedId()
     if DoesEntityExist(Ped) then
         Citizen.CreateThread(function()
+            revivePed(Ped)
+
             SetEntityCoords(Ped, HospitalLocation.Hospital.x, HospitalLocation.Hospital.y, HospitalLocation.Hospital.z)
             SetEntityHeading(Ped, HospitalLocation.Hospital.h)
+            
             CurrentlyHospitaled = true
 
             while HospitalTime >= 0 and not EarlyDischarge do
+                Ped = PlayerPedId()
                 SetEntityInvincible(Ped, true)
                 if IsPedInAnyVehicle(Ped, false) then
 					ClearPedTasksImmediately(Ped)

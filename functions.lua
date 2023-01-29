@@ -262,7 +262,12 @@ function LoadPed(Hash)
     end)
 end
 
-
+function revivePed(ped)
+    local playerPos = GetEntityCoords(ped, true)
+    NetworkResurrectLocalPlayer(playerPos, true, true, false)
+    SetPlayerInvincible(ped, false)
+    ClearPedBloodDamage(ped)
+end
 
 --Weapon Functions
 function GiveWeapon(Hash)
